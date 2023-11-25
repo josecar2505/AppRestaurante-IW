@@ -1,0 +1,47 @@
+.mesa-button {
+  display: block;
+  width: 50%; /* Asegura que el botón ocupe todo el ancho disponible */
+  margin-bottom: 20px; /* Ajusta según sea necesario para el espacio entre los botones */
+}
+.dice-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.dice-item {
+  text-align: center;
+  margin: 5px;
+}
+
+.dice-image {
+  width: 100%; /* Ajusta el tamaño de las imágenes según sea necesario */
+  max-width: 150px; /* Ajusta el tamaño máximo de las imágenes según sea necesario */
+  height: auto;
+}
+
+.label {
+  margin-top: 5px; /* Espacio entre la imagen y la etiqueta */
+  font-size: 14px; /* Tamaño de la etiqueta */
+}
+ion-title {
+  font-size: 20px; /* Tamaño del texto del encabezado */
+  --color: white; /* Cambia a tu color amarillo preferido */
+}
+/* Cambiar el color del fondo del encabezado a verde */
+ion-header {
+  --ion-background-color:#405D4C; /* Cambia a tu color verde preferido */
+  color: white; /* Color del texto en el encabezado */
+}
+
+/* Cambiar el color de fondo y texto de los botones del segmento en el encabezado */
+ion-segment-button {
+  --color: white; /* Cambia a tu color amarillo preferido */
+  --background: #405D4C; /* Cambia a tu color verde preferido */
+}
+ion-content {
+  --ion-background-color: #405D4C; /* Cambia a tu color verde preferido */
+}
+
+
+
