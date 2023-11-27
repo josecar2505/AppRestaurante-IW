@@ -1,21 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="cabecera">
+  <ion-card class="card-center">
+    <ion-card-header class="titulos">
+      <ion-card-title>ANDRE'S HOUSE</ion-card-title>
+      <ion-card-subtitle>Inicio de Sesión</ion-card-subtitle>
+    </ion-card-header>
 
-<ion-content [fullscreen]="true">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input formControlName="username" type="text"></ion-input>
-    </ion-item>
+    <ion-card-content class="flex-container">
+      <div class="avatar-container">
+        <img src="https://us.123rf.com/450wm/sokolfly/sokolfly1806/sokolfly180600175/104544794-plantilla-de-diseño-de-logo-de-comida-mexicana-fondo-de-ilustración-de-logotipo-de-comida.jpg?ver=6" alt="Avatar" class="avatar-img" />
+      </div>
+      
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <br />
+        <ion-item>
+          <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input formControlName="username" type="text"></ion-input>
+        </ion-item>
+        <br />
+        <ion-item>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <br />
+        <ion-button
+          expand="full"
+          type="submit"
+          [disabled]="!loginForm.valid"
+          class="login-button"
+          color="orange"
+        >Iniciar Sesión</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</div>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
-
-    <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">Iniciar Sesión</ion-button>
-  </form>
-</ion-content>

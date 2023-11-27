@@ -30,17 +30,17 @@ ion-title {
 }
 /* Cambiar el color del fondo del encabezado a verde */
 ion-header {
-  --ion-background-color:#405D4C; /* Cambia a tu color verde preferido */
+  --ion-background-color:#f06610; /* Cambia a tu color verde preferido */
   color: white; /* Color del texto en el encabezado */
 }
 
 /* Cambiar el color de fondo y texto de los botones del segmento en el encabezado */
 ion-segment-button {
   --color: white; /* Cambia a tu color amarillo preferido */
-  --background: #405D4C; /* Cambia a tu color verde preferido */
+  --background: #f06610; /* Cambia a tu color verde preferido */
 }
 ion-content {
-  --ion-background-color: #405D4C; /* Cambia a tu color verde preferido */
+  --ion-background-color: #ffffff; /* Cambia a tu color verde preferido */
 }
 
 
