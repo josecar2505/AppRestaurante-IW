@@ -18,9 +18,18 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'menu-orden',
+    loadChildren: () => import('./menu-orden/menu-orden.module').then( m => m.MenuOrdenPageModule)
+  },
+  {
+    path: 'comanda',
+    loadChildren: () => import('./comanda/comanda.module').then( m => m.ComandaPageModule)
+  },
+  {
     path: '**', // Cualquier otra ruta no especificada redirigirá al usuario a la página de inicio de sesión
     redirectTo: 'login' // Redirigir a la página de inicio de sesión en lugar de dejar en blanco
-  }
+  },
+  
 ];
 
 @NgModule({

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      ANDRE'S HOUSE
+    </ion-title>
+    <ion-segment value="all">
+      <ion-segment-button value="mesas" (click)="gotomesas()">
+        <ion-label>Mesas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="orden">
+        <ion-label>Orden</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="comanda">
+        <ion-label>Comanda</ion-label>
+      </ion-segment-button>
+      <ion-segment-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<br>
+<br>
+<br>
+<ion-content [fullscreen]="true" class="ion-padding">
+      <p>
+        AQUI APARECERÁ LA COMANDA CON LOS PRODUCTOS Y EL TOTAL DE UNA MESA UNA MESA
+      </p>
+</ion-content>
+
+
+
+
+
