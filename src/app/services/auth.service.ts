@@ -15,14 +15,19 @@ export class AuthService {
     this.users.push({
       username: "Gerente",
       password: "administrador",
-      type: "administrator"
+      type: "administrador"
     });
     this.users.push({
       username: "Mesero",
       password: "1234567890",
-      type: "administrator"
+      type: "mesero"
     });
     
+  }
+
+  getUserData(): any {
+    const userDataString = localStorage.getItem(this.userDataKey);
+    return userDataString ? JSON.parse(userDataString) : null;
   }
 
   login(username: string, password:string):boolean {
@@ -30,9 +35,8 @@ export class AuthService {
       return element.username === username && element.password === password;
     });
     if (userFound) {
-      const encryptedUsername = SHA256(username).toString();
-      // Guardar los datos del usuario en el LocalStorage
-      const userData = { username: encryptedUsername, /* otros datos del usuario */ };
+      const encryptedUsername = SHA256(username).toString(); // Guardar los datos del usuario en el LocalStorage
+      const userData = { username: encryptedUsername, type: userFound.type, /* otros datos del usuario */ };
       localStorage.setItem(this.userDataKey, JSON.stringify(userData));
       return true; // Usuario autenticado
     } else {
@@ -66,6 +70,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log("logout: " + localStorage.getItem(this.userDataKey));
     localStorage.removeItem(this.userDataKey);
     // Otros pasos de cierre de sesión si es necesario
   }

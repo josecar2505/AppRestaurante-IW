@@ -13,6 +13,9 @@
       <ion-segment-button value="comanda">
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="addProduct" (click)="openProductAddPage()" *ngIf="isGerente()">
+        <ion-label>Añadir producto</ion-label>
+      </ion-segment-button>
       <ion-segment-button (click)="logout()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-segment-button>
@@ -20,14 +23,62 @@
   </ion-toolbar>
 </ion-header>
 
-<br>
-<br>
-<br>
-<ion-content [fullscreen]="true" class="ion-padding">
-      <p>
-        AQUI APARECERÁ EL MENÚ PARA ASIGNAR UNA ORDEN A UNA MESA
-      </p>
-</ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-select label="Tipo" 
+        [multiple]="true"
+        interface="popover"
+        label-placement="floating"
+        [(ngModel)]="filter"
+        (ionChange)="filterProducts()"
+        >
+        <ion-select-option value="Desayunos">
+          Desayunos
+        </ion-select-option>
+        <ion-select-option value="Entradas">
+          Entradas
+        </ion-select-option>
+        <ion-select-option value="Bebidas">
+          Bebidas
+        </ion-select-option>
+        <ion-select-option value="Postres">
+          Postres
+        </ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3" *ngFor="let product of productsFounds; index as i">
+        <ion-card>
+          <img [src]="product.photo+i" style="width: 100%"/>
+          <ion-card-header>
+            <ion-card-title>
+              {{product.name}}
+              <ion-badge [color]="getColor(product.type)">{{product.type}}</ion-badge>
+            </ion-card-title>
+            <ion-card-subtitle>{{ product.price| currency }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            {{product.name}}
+          </ion-card-content>
+          <ion-buttons class="ion-justify-content-between">
+            <ion-button expand="block" icon-only>
+              <ion-icon name="cart-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block" (click) ="deleteProduct(product)" icon-only *ngIf="isGerente()">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+            <ion-button expand="block" (click)="openActProductPage('/update-product',product)" color="warning" icon-only *ngIf="isGerente()">
+              <ion-icon name="pencil"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid></ion-content>
 
 
 

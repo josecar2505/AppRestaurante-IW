@@ -2,15 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-
+import { Product } from '../models/product.model';
+import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-menu-orden',
   templateUrl: './menu-orden.page.html',
   styleUrls: ['./menu-orden.page.scss'],
 })
 export class MenuOrdenPage implements OnInit {
+  userData: any;
 
-  constructor(private router: Router, private authService: AuthService, private alertController: AlertController) {
+  public products: Product[] = [];
+  public productsFounds: Product[] = [];
+
+  constructor(private router: Router, private productService: ProductService, private authService: AuthService, private alertController: AlertController) {
+    this.productService.getProducts().subscribe((products: Product[]) => {
+      this.products = products;
+      this.productsFounds = this.products;
+    });
+  }
+  
+
+  openProductAddPage() {
+    this.router.navigate(['/add-product']); // Asume que la ruta 'product-add' existe para añadir productos.
+  }
+
+  isGerente(): boolean {
+    // Asumiendo que tienes un método en tu servicio de autenticación para obtener el rol del usuario
+    console.log(this.authService.getUserData().type);
+    return this.authService.getUserData().type == "administrador";
   }
 
   public gotomesas() {
@@ -22,8 +42,81 @@ export class MenuOrdenPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  public filter = [
+    "Desayunos",
+    "Entradas",
+    "Bebidas",
+    "Postres",
+  ]
+
+  public filterProducts(): void {
+    console.log(this.filter);
+    this.productsFounds = this.products.filter(
+      item => {
+        return this.filter.includes(item.type);
+      }
+    );
+  }
+
+  async deleteProduct(product: Product) {
+    const alert = await this.alertController.create({
+      header: 'Eliminar Producto',
+      message: `¿deseas eliminar?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: (data) => {
+            this.productService.deleteProduct(product).then(() => {
+              console.log("Producto eliminado correctamente");
+            }).catch((error) => {
+              console.log("Error al eliminar el producto" + error);
+            }); 
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+
+  public openActProductPage(rut : string, product: Product) {
+    this.productService.setProductAct(product);
+    this.router.navigate([rut]);
+  }
+
+  public colors = [
+    {
+      type: "Abarrotes",
+      color: "primary"
+    },
+    {
+      type: "Frutas y Verduras",
+      color: "secondary"
+    },
+    {
+      type: "Limpieza",
+      color: "warning"
+    },
+    {
+      type: "Farmacia",
+      color: "danger"
+    }
+  ];
+
+  public getColor(type: string): string {
+    const itemFound = this.colors.find((element) => {
+      return element.type === type;
+    });
+    let color = itemFound && itemFound.color ? itemFound.color : "";
+    return color;
+  }
 
   ngOnInit() {
+    this.userData = this.authService.getUserData();
   }
 
 }
