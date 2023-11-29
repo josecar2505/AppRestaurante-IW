@@ -43,10 +43,7 @@ export class MenuOrdenPage implements OnInit {
   }
 
   public filter = [
-    "Desayunos",
-    "Entradas",
-    "Bebidas",
-    "Postres",
+    "Desayunos"
   ]
 
   public filterProducts(): void {
@@ -87,34 +84,6 @@ export class MenuOrdenPage implements OnInit {
     this.productService.setProductAct(product);
     this.router.navigate([rut]);
   }
-
-  public colors = [
-    {
-      type: "Abarrotes",
-      color: "primary"
-    },
-    {
-      type: "Frutas y Verduras",
-      color: "secondary"
-    },
-    {
-      type: "Limpieza",
-      color: "warning"
-    },
-    {
-      type: "Farmacia",
-      color: "danger"
-    }
-  ];
-
-  public getColor(type: string): string {
-    const itemFound = this.colors.find((element) => {
-      return element.type === type;
-    });
-    let color = itemFound && itemFound.color ? itemFound.color : "";
-    return color;
-  }
-
   ngOnInit() {
     this.userData = this.authService.getUserData();
   }

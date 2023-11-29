@@ -47,7 +47,7 @@ export class UpdateProductPage {
     }
 
     // Redirigir a la pestaña tab1
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/menu-orden']);
   }
 
   

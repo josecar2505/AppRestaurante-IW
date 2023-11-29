@@ -1,8 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      ANDRE'S HOUSE
-    </ion-title>
+    <ion-title> ANDRE'S HOUSE </ion-title>
     <ion-segment value="all">
       <ion-segment-button value="mesas" (click)="gotomesas()">
         <ion-label>Mesas</ion-label>
@@ -10,10 +8,14 @@
       <ion-segment-button value="orden">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="comanda">
+      <ion-segment-button [disabled]="true" value="comanda">
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="addProduct" (click)="openProductAddPage()" *ngIf="isGerente()">
+      <ion-segment-button
+        value="addProduct"
+        (click)="openProductAddPage()"
+        *ngIf="isGerente()"
+      >
         <ion-label>Añadir producto</ion-label>
       </ion-segment-button>
       <ion-segment-button (click)="logout()">
@@ -23,29 +25,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">  
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-grid>
     <ion-row>
       <ion-col size="12">
-        <ion-select label="Tipo" 
-        [multiple]="true"
-        interface="popover"
-        label-placement="floating"
-        [(ngModel)]="filter"
-        (ionChange)="filterProducts()"
+        <ion-select
+          fill="outline"
+          class="custom-select"
+          label="Tipo"
+          interface="popover"
+          label-placement="floating"
+          [(ngModel)]="filter"
+          (ionChange)="filterProducts()"
+          value="Desayunos"
         >
-        <ion-select-option value="Desayunos">
-          Desayunos
-        </ion-select-option>
-        <ion-select-option value="Entradas">
-          Entradas
-        </ion-select-option>
-        <ion-select-option value="Bebidas">
-          Bebidas
-        </ion-select-option>
-        <ion-select-option value="Postres">
-          Postres
-        </ion-select-option>
+          <ion-select-option value="Desayunos"> Desayunos </ion-select-option>
+          <ion-select-option value="Entradas"> Entradas </ion-select-option>
+          <ion-select-option value="Bebidas"> Bebidas </ion-select-option>
+          <ion-select-option value="Postres"> Postres </ion-select-option>
         </ion-select>
       </ion-col>
     </ion-row>
@@ -53,34 +50,39 @@
     <ion-row>
       <ion-col size="3" *ngFor="let product of productsFounds; index as i">
         <ion-card>
-          <img [src]="product.photo+i" style="width: 100%"/>
+          <img [src]="product.photo+i" />
           <ion-card-header>
             <ion-card-title>
               {{product.name}}
-              <ion-badge [color]="getColor(product.type)">{{product.type}}</ion-badge>
+              <ion-badge style="background: orange">{{product.type}}</ion-badge>
             </ion-card-title>
             <ion-card-subtitle>{{ product.price| currency }}</ion-card-subtitle>
           </ion-card-header>
-          <ion-card-content>
-            {{product.name}}
-          </ion-card-content>
+          <ion-card-content> {{product.description}} </ion-card-content>
           <ion-buttons class="ion-justify-content-between">
-            <ion-button expand="block" icon-only>
-              <ion-icon name="cart-outline"></ion-icon>
+            <ion-button expand="block" icon-only color="tertiary">
+              <ion-icon size="large" name="cart-outline"></ion-icon>
             </ion-button>
-            <ion-button expand="block" (click) ="deleteProduct(product)" icon-only *ngIf="isGerente()">
-              <ion-icon name="trash-outline"></ion-icon>
+            <ion-button
+              expand="block"
+              (click)="deleteProduct(product)"
+              color="danger"
+              icon-only
+              *ngIf="isGerente()"
+            >
+              <ion-icon size="large" name="trash-outline"></ion-icon>
             </ion-button>
-            <ion-button expand="block" (click)="openActProductPage('/update-product',product)" color="warning" icon-only *ngIf="isGerente()">
-              <ion-icon name="pencil"></ion-icon>
+            <ion-button
+              expand="block"
+              (click)="openActProductPage('/update-product',product)"
+              color="warning"
+              icon-only
+              *ngIf="isGerente()"
+            >
+              <ion-icon size="large" name="pencil"></ion-icon>
             </ion-button>
           </ion-buttons>
         </ion-card>
       </ion-col>
-    </ion-row>
-  </ion-grid></ion-content>
-
-
-
-
-
+    </ion-row> </ion-grid
+></ion-content>
