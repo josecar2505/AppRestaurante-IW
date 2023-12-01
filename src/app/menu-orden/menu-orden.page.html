@@ -8,9 +8,11 @@
       <ion-segment-button value="orden">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
-      <ion-segment-button [disabled]="true" value="comanda">
+    <ion-segment value="comanda">
+      <ion-segment-button (click)="verComanda()" *ngIf="comandaHabilitada">
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
+    </ion-segment>
       <ion-segment-button
         value="addProduct"
         (click)="openProductAddPage()"
@@ -60,7 +62,7 @@
           </ion-card-header>
           <ion-card-content> {{product.description}} </ion-card-content>
           <ion-buttons class="ion-justify-content-between">
-            <ion-button expand="block" icon-only color="tertiary">
+            <ion-button expand="block" icon-only color="tertiary" (click)="agregarAComanda(product)">
               <ion-icon size="large" name="cart-outline"></ion-icon>
             </ion-button>
             <ion-button
