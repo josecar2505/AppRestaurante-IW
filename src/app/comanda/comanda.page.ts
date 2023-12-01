@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Product } from '../models/product.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-comanda',
@@ -9,7 +10,10 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./comanda.page.scss'],
 })
 export class ComandaPage implements OnInit {
-  constructor(private router: Router, private authService: AuthService, private alertController: AlertController) {
+
+  comanda: Product[] = [];
+
+  constructor(private router: Router, private authService: AuthService, private alertController: AlertController, private activatedRoute: ActivatedRoute) {
   }
     
   public logout() {
@@ -22,6 +26,10 @@ export class ComandaPage implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      const comandaParam = params.get('comanda');
+      this.comanda = JSON.parse(comandaParam ?? '[]');
+    });
   }
 
 }

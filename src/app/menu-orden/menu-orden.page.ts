@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
 import { Product } from '../models/product.model';
+import { AuthService } from '../services/auth.service';
 import { ProductService } from '../services/product.service';
 @Component({
   selector: 'app-menu-orden',
@@ -14,12 +14,21 @@ export class MenuOrdenPage implements OnInit {
 
   public products: Product[] = [];
   public productsFounds: Product[] = [];
+  public comanda: Product[] = [];
+  public comandaHabilitada: boolean = false; 
 
   constructor(private router: Router, private productService: ProductService, private authService: AuthService, private alertController: AlertController) {
     this.productService.getProducts().subscribe((products: Product[]) => {
       this.products = products;
       this.productsFounds = this.products;
     });
+  }
+
+  agregarAComanda(product: Product): void {
+    this.comanda.push(product);
+    console.log('Producto agregado a la comanda:', product);
+
+    this.comandaHabilitada = true;
   }
   
 
@@ -53,6 +62,10 @@ export class MenuOrdenPage implements OnInit {
         return this.filter.includes(item.type);
       }
     );
+  }
+
+  verComanda(): void {
+    this.router.navigate(['/comanda', { comanda: JSON.stringify(this.comanda) }]);
   }
 
   async deleteProduct(product: Product) {
