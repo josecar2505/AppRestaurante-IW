@@ -4,18 +4,28 @@ import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
+import { ComServiceService } from '../services/order.service';
+
+
+
+
 @Component({
   selector: 'app-menu-orden',
   templateUrl: './menu-orden.page.html',
   styleUrls: ['./menu-orden.page.scss'],
 })
 export class MenuOrdenPage implements OnInit {
+  numeroMesa: string;
   userData: any;
 
   public products: Product[] = [];
   public productsFounds: Product[] = [];
 
-  constructor(private router: Router, private productService: ProductService, private authService: AuthService, private alertController: AlertController) {
+  constructor(private router: Router, private productService: ProductService, 
+    private comServiceService: ComServiceService,
+    private authService: AuthService, private alertController: AlertController, 
+    ) {
+      this.numeroMesa = '';
     this.productService.getProducts().subscribe((products: Product[]) => {
       this.products = products;
       this.productsFounds = this.products;
@@ -37,6 +47,9 @@ export class MenuOrdenPage implements OnInit {
     this.router.navigate(['/home']);
   }
     
+  public gotocomanda() {
+    this.router.navigate(['/comanda']);
+  }
   public logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
@@ -87,6 +100,13 @@ export class MenuOrdenPage implements OnInit {
   ngOnInit() {
     this.userData = this.authService.getUserData();
   }
+
+  public addToOrder(product: Product, i: number) {
+    product.photo = product.photo + i;
+    this.comServiceService.addToOrder(product);
+    console.log(this.comServiceService.getOrder());
+  }
+
 
 }
 
