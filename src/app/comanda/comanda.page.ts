@@ -94,4 +94,13 @@ export class ComandaPage implements OnInit {
     await alert.present();
   }
 
+  public addItem(item: OrderItem) {
+    this.comServiceService.addItemToCart(item);
+  }
+
+  public removeAnItem(item: OrderItem) {
+    this.comServiceService.removeAnItem(item);
+  }
+
+
 }

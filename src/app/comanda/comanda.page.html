@@ -42,6 +42,12 @@
           <ion-button slot="end"(click)="promptRemoveItem(item)" expand="block" color="danger">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
+          <ion-button slot="end" expand="block" color="warning"(click)="removeAnItem(item)" style="margin-right: -20px;">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" expand="block" color="warning"(click)="addItem(item)" >
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
         </ion-item>
       </ion-list>
       <ion-item class="ion-card-total">

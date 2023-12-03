@@ -18,6 +18,9 @@ export class ComServiceService {
     return this.order;
   }
 
+  
+
+
   public addToOrder(product: Product): Order {
 
     const existingOrderItem = this.order.items.find((item) => item.product.name === product.name);
@@ -64,4 +67,32 @@ export class ComServiceService {
       this.order.itemCount = this.calculateItemCount(this.order);
     }
   }
+
+  public addItemToCart(item: OrderItem) {
+    const index = this.order.items.findIndex((cartItem) => cartItem === item);
+    if (index !== -1) {
+      this.order.items[index].quantity += 1;
+    }
+
+    // Actualiza el total y la cantidad de artículos
+    this.order.total = this.calculateTotal(this.order);
+    this.order.itemCount = this.calculateItemCount(this.order);
+  }
+
+  public removeAnItem(item: OrderItem) {
+    const index = this.order.items.findIndex((cartItem) => cartItem === item);
+    if (index !== -1) {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+      } else {
+        // Si la cantidad a eliminar es igual o mayor que la cantidad en el carrito, elimina el elemento por completo.
+        this.order.items.splice(index, 1);
+      }
+
+      // Actualiza el total y la cantidad de artículos
+      this.order.total = this.calculateTotal(this.order);
+      this.order.itemCount = this.calculateItemCount(this.order);
+    }
+  }
+
 }
