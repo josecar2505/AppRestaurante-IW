@@ -107,6 +107,21 @@ export class MenuOrdenPage implements OnInit {
     console.log(this.comServiceService.getOrder());
   }
 
+  public OrderVacia(): boolean {
+    const order = this.comServiceService.getOrder();
+
+    if(order.items.length == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+
+
+
+
 
 }
 

@@ -10,7 +10,7 @@
       <ion-segment-button value="orden">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
-      <ion-segment-button  value="comanda" (click)="gotocomanda()"> <!-- [disabled] = "true" -->
+      <ion-segment-button  value="comanda" (click)="gotocomanda()" [disabled]="OrderVacia()" > <!-- [disabled] = "true" -->
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
       <ion-segment-button
