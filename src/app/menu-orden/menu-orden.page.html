@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> ANDRE'S HOUSE </ion-title>
+    <ion-title>
+      ANDRES'S HOUSE 
+    </ion-title>
     <ion-segment value="all">
       <ion-segment-button value="mesas" (click)="gotomesas()">
         <ion-label>Mesas</ion-label>
@@ -8,11 +10,9 @@
       <ion-segment-button value="orden">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
-    <ion-segment value="comanda">
-      <ion-segment-button (click)="verComanda()" *ngIf="comandaHabilitada">
+      <ion-segment-button  value="comanda" (click)="gotocomanda()" [disabled]="OrderVacia()" > <!-- [disabled] = "true" -->
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
-    </ion-segment>
       <ion-segment-button
         value="addProduct"
         (click)="openProductAddPage()"
@@ -62,8 +62,8 @@
           </ion-card-header>
           <ion-card-content> {{product.description}} </ion-card-content>
           <ion-buttons class="ion-justify-content-between">
-            <ion-button expand="block" icon-only color="tertiary" (click)="agregarAComanda(product)">
-              <ion-icon size="large" name="cart-outline"></ion-icon>
+            <ion-button expand="block" icon-only color="tertiary" (click)="addToOrder(product, i)">
+              <ion-icon size="large" name="cart-outline" ></ion-icon>
             </ion-button>
             <ion-button
               expand="block"
@@ -86,5 +86,6 @@
           </ion-buttons>
         </ion-card>
       </ion-col>
-    </ion-row> </ion-grid
-></ion-content>
+    </ion-row> 
+  </ion-grid>
+</ion-content>

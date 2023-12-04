@@ -7,7 +7,7 @@
       <ion-segment-button value="mesas" (click)="gotomesas()">
         <ion-label>Mesas</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="orden">
+      <ion-segment-button value="orden" [disabled]="true" (click)="gotomenu()">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
       <ion-segment-button value="comanda">
@@ -20,14 +20,61 @@
   </ion-toolbar>
 </ion-header>
 
-<br>
-<br>
-<br>
+
 <ion-content [fullscreen]="true" class="ion-padding">
-      <p>
-        AQUI APARECERÁ LA COMANDA CON LOS PRODUCTOS Y EL TOTAL DE UNA MESA UNA MESA
-      </p>
+  <ion-card class="ion-card-centered">
+    <ion-card-content>
+      <ion-item class="ion-card-title"> Orden de la mesa: {{NumMesa()}} </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let item of order.items">
+          <ion-thumbnail slot="start">
+            <img [src]="item.product.photo" alt="{{ item.product.name }}"
+            style="width: 100px; height: 100px;"	>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ item.product.name }}</h2>
+            <p>{{ item.product.description }}</p>
+            <p >
+            {{ item.quantity }} x
+            ${{ item.product.price }} ................................</p>
+            <br>
+          </ion-label>          
+          <ion-label slot="end">${{ item.product.price * item.quantity }}</ion-label>
+          <ion-button slot="end"(click)="promptRemoveItem(item)" expand="block" color="danger">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" expand="block" color="warning"(click)="removeAnItem(item)" style="margin-right: -20px;">
+            <ion-icon name="remove"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" expand="block" color="warning"(click)="addItem(item)" >
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-item class="ion-card-total">
+        <ion-label>Total:</ion-label>
+        <ion-note slot="end" class="total-amount big-text">{{ order.total | currency:'MXN':'symbol':'1.2-2' }}</ion-note>
+      </ion-item>
+      <br>
+
+      <ion-buttons class="ion-justify-content-between">
+        <ion-button (click)="gotomenu()" expand="block" icon-only color="tertiary" > Actualizar
+          <ion-icon size="large" name="pencil"></ion-icon>
+        </ion-button>
+        <ion-button
+          expand="block"
+          color="success"
+          (click) = "mostrarTicket()"
+        >Pagar
+        <ion-icon name="cash" size="large"></ion-icon >
+        </ion-button >
+      </ion-buttons>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+
+
 
 
 

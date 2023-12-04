@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de la Orden</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Total de la Orden: ${{ order.total.toFixed(2) }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let item of order.items">
+          <ion-label>{{ item.quantity }} x {{ item.product.name }}</ion-label>
+          <ion-note slot="end">${{ (item.quantity * item.product.price).toFixed(2) }}</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ion-button expand="full" color="primary" (click)="registrarMesa()">
+    Aceptar
+  </ion-button>
+
+</ion-content>

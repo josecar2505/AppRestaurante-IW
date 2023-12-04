@@ -30,10 +30,6 @@ const routes: Routes = [
     loadChildren: () => import('./add-product/add-product.module').then( m => m.AddProductPageModule)
   },
   {
-    path: 'comanda',
-    loadChildren: () => import('./comanda/comanda.module').then( m => m.ComandaPageModule)
-  },
-  {
     path: 'update-product',
     loadChildren: () => import('./update-product/update-product.module').then( m => m.UpdateProductPageModule)
   },
@@ -41,6 +37,11 @@ const routes: Routes = [
     path: '**', // Cualquier otra ruta no especificada redirigirá al usuario a la página de inicio de sesión
     redirectTo: 'login' // Redirigir a la página de inicio de sesión en lugar de dejar en blanco
   },
+  {
+    path: 'order-details-modal',
+    loadChildren: () => import('./order-details-modal/order-details-modal.module').then( m => m.OrderDetailsModalPageModule)
+  },
+
   
 ];
 
