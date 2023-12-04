@@ -29,6 +29,7 @@ export class ComandaPage implements OnInit {
     this.order = this.comServiceService.getOrder();
   }
 
+  
 
 
   async mostrarTicket() {
@@ -56,6 +57,10 @@ export class ComandaPage implements OnInit {
   }
   public gotomenu() {
     this.router.navigate(['/menu-orden']);
+  }
+
+  public NumMesa(){
+    return this.comServiceService.numeroMesa;
   }
 
   ngOnInit() {

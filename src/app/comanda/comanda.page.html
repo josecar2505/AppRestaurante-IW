@@ -7,7 +7,7 @@
       <ion-segment-button value="mesas" (click)="gotomesas()">
         <ion-label>Mesas</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="orden"  (click)="gotomenu()">
+      <ion-segment-button value="orden" [disabled]="true" (click)="gotomenu()">
         <ion-label>Orden</ion-label>
       </ion-segment-button>
       <ion-segment-button value="comanda">
@@ -24,6 +24,7 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-card class="ion-card-centered">
     <ion-card-content>
+      <ion-item class="ion-card-title"> Orden de la mesa: {{NumMesa()}} </ion-item>
       <ion-list>
         <ion-item *ngFor="let item of order.items">
           <ion-thumbnail slot="start">

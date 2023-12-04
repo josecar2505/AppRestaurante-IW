@@ -13,6 +13,9 @@
       <ion-segment-button value="comanda" [disabled]="true">
         <ion-label>Comanda</ion-label>
       </ion-segment-button>
+      <ion-segment-button value="historial" *ngIf="isGerente()">
+      <ion-label>Historial</ion-label>
+    </ion-segment-button>
       <ion-segment-button (click)="logout()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-segment-button>
@@ -27,37 +30,37 @@
   <ion-grid>
     <ion-row>
       <ion-col size-md="7" offset-md="0">
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 1</ion-button>
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 2</ion-button>
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 3</ion-button>
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 4</ion-button>
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 5</ion-button>
-        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar()">Mesa 6</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(1)">Mesa 1</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(2)">Mesa 2</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(3)">Mesa 3</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(4)">Mesa 4</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(5)">Mesa 5</ion-button>
+        <ion-button color="warning" class="mesa-button" size="large" (click)="ordenar(6)">Mesa 6</ion-button>
       </ion-col>
       <ion-col size-md="5" offset-md="-2" class="dice-images">
   <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 1" class="dice-image">
-    <div class="label">1.-Libre</div>
+    <div class="label">1.-{{getStatus(1)}}</div>
   </div>
   <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 2" class="dice-image">
-    <div class="label">2.-Libre</div>
+    <div class="label">2.-{{getStatus(2)}}</div>
   </div>
   <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 3" class="dice-image">
-    <div class="label">3.-Libre</div>
+    <div class="label">3.-{{getStatus(3)}}</div>
   </div>
   <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 4" class="dice-image">
-    <div class="label">4.-Libre</div>
+    <div class="label">4.-{{getStatus(4)}}</div>
   </div>
    <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 5" class="dice-image">
-    <div class="label">5.-Libre</div>
+    <div class="label">5.-{{getStatus(5)}}</div>
   </div>
    <div class="dice-item">
     <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-vector-cartoon-flat-table-with-tablecloth-png-image_4732757.png" alt="Imagen 5" class="dice-image">
-    <div class="label">6.-Libre</div>
+    <div class="label">6.-{{getStatus(6)}}</div>
   </div>
 </ion-col>
     </ion-row>

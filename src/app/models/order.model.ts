@@ -10,3 +10,10 @@ export interface Order {
     total: number;
     itemCount: number;
 }
+
+export interface Mesa {
+    numeroMesa : number;
+    order: Order;
+    fecha: Date;
+    status: boolean;
+}

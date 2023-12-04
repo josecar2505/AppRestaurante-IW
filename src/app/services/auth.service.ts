@@ -19,7 +19,7 @@ export class AuthService {
     });
     this.users.push({
       username: "Mesero",
-      password: "1234567890",
+      password: "12345",
       type: "mesero"
     });
     

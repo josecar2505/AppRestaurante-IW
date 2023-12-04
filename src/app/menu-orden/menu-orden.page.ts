@@ -7,15 +7,14 @@ import { ProductService } from '../services/product.service';
 import { ComServiceService } from '../services/order.service';
 
 
-
-
 @Component({
   selector: 'app-menu-orden',
   templateUrl: './menu-orden.page.html',
   styleUrls: ['./menu-orden.page.scss'],
 })
+
 export class MenuOrdenPage implements OnInit {
-  numeroMesa: string;
+  numeroMesa: number = 0;
   userData: any;
 
   public products: Product[] = [];
@@ -25,7 +24,6 @@ export class MenuOrdenPage implements OnInit {
     private comServiceService: ComServiceService,
     private authService: AuthService, private alertController: AlertController, 
     ) {
-      this.numeroMesa = '';
     this.productService.getProducts().subscribe((products: Product[]) => {
       this.products = products;
       this.productsFounds = this.products;
@@ -39,7 +37,7 @@ export class MenuOrdenPage implements OnInit {
 
   isGerente(): boolean {
     // Asumiendo que tienes un método en tu servicio de autenticación para obtener el rol del usuario
-    console.log(this.authService.getUserData().type);
+    //console.log(this.authService.getUserData().type);
     return this.authService.getUserData().type == "administrador";
   }
 
@@ -56,7 +54,7 @@ export class MenuOrdenPage implements OnInit {
   }
 
   public filter = [
-    "Desayunos"
+    ""
   ]
 
   public filterProducts(): void {
@@ -103,8 +101,8 @@ export class MenuOrdenPage implements OnInit {
 
   public addToOrder(product: Product, i: number) {
     product.photo = product.photo + i;
+    console.log("Producto añadido a la mesa"+ this.comServiceService.numeroMesa);
     this.comServiceService.addToOrder(product);
-    console.log(this.comServiceService.getOrder());
   }
 
   public OrderVacia(): boolean {
