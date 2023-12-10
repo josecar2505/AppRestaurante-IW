@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
-import { Mesa, Order, OrderItem } from '../models/order.model';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Mesa, Order, OrderItem } from '../models/order.model';
+import { Product } from '../models/product.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ComServiceService {
   private mesaCollection: AngularFirestoreCollection<Mesa>;
+  
   private mesas: Mesa[] = Array.from({ length: 6 }, (_, i) => ({
     numeroMesa: i + 1,
     order: { items: [], total: 0, itemCount: 0 },
@@ -15,11 +19,28 @@ export class ComServiceService {
   }));
 
   public numeroMesa: number = 0;
+  
 
+  getHistorialComandasByDateRange(startDate: Date, endDate: Date): Observable<Mesa[]> {
+    console.log("inicio"+startDate + " fin" + endDate)
+    return this.mesaCollection.valueChanges().pipe(
+      map((mesas: Mesa[]) => {
+        return mesas.filter((mesa) => {
+          // Compara las fechas directamente
+          return mesa.fecha >= startDate && mesa.fecha <= endDate;
+          
+        });
+      })
+    );
+  }
+  
+  
 
   private get order(): Order {
     return this.mesas[this.numeroMesa - 1].order;
   }
+
+  
 
   constructor(private firestore: AngularFirestore) {
     this.numeroMesa = 1; // Set a default value or initialize it based on your logic
@@ -111,7 +132,7 @@ export class ComServiceService {
     this.mesas[this.numeroMesa - 1].fecha = new Date();
   }
 
-  saveMesa(): Promise<string> {
+  /*saveMesa(): Promise<string> {
     const currentMesa = this.mesas.find((mesa) => mesa.numeroMesa === this.numeroMesa);
   
     if (currentMesa) {
@@ -131,7 +152,33 @@ export class ComServiceService {
       console.error(`No se encontró la mesa con el número ${this.numeroMesa}`);
       return Promise.resolve("error");
     }
+  }*/
+
+  saveMesa(): Promise<string> {
+    const currentMesa = this.mesas.find((mesa) => mesa.numeroMesa === this.numeroMesa);
+  
+    if (currentMesa) {
+      const { numeroMesa, ...rest } = currentMesa;
+      
+      // Obtener la fecha y hora actuales
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString(); 
+  
+      return this.mesaCollection.add({ numeroMesa, ...rest, fecha: formattedDate })
+        .then((doc) => {
+          console.log("Mesa añadida con id " + doc.id);
+          return "success";
+        })
+        .catch((error) => {
+          console.log("Error al añadir la mesa " + error);
+          return "error";
+        });
+    } else {
+      console.error(`No se encontró la mesa con el número ${this.numeroMesa}`);
+      return Promise.resolve("error");
+    }
   }
+  
   
   
 

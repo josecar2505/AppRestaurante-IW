@@ -24,6 +24,10 @@ export class HomePage {
     this.router.navigate(['/login']);
   }
 
+  public gotohistorial() {
+    this.router.navigate(['/historial']);
+  }
+
   public ordenar(numeroMesa: number) {
     // Guarda el número de mesa en el servicio o donde sea necesario
     this.comServiceService.setNumeroMesa(numeroMesa);

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      ANDRES'S HOUSE 
+    </ion-title>
+    <ion-segment value="all">
+      <ion-segment-button value="mesas" (click)="gotomesas()">
+        <ion-label>Mesas</ion-label>
+      </ion-segment-button>
+    
+      <ion-segment-button value="orden">
+        <ion-label>Orden</ion-label>
+      </ion-segment-button>
+    
+      <ion-segment-button value="comanda">
+        <ion-label>Comanda</ion-label>
+      </ion-segment-button>
+    
+      <ion-segment-button value="historial">
+        <ion-label>Historial</ion-label>
+      </ion-segment-button>
+    
+      <ion-segment-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card class="ion-card-centered">
+    <ion-card-content>
+      <h1>Historial de Ventas</h1>
+      
+      <!-- Date Range Selection -->
+      <ion-item>
+        <ion-label>Fecha de inicio</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="startDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Fecha de fin</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="endDate"></ion-datetime>
+      </ion-item>
+
+      <ion-button (click)="loadHistorial()">Buscar Historial</ion-button>
+
+      <!-- Display Historical Sales -->
+      <!-- Display Historical Sales -->
+<ion-list *ngIf="historial.length > 0">
+  <ion-item *ngFor="let mesa of historial">
+    <ion-label>
+      <h2>Mesa {{ mesa.numeroMesa }}</h2>
+      <p>Status: {{ mesa.status ? 'Occupied' : 'Vacant' }}</p>
+      <!-- No es necesario llamar a toDate() en un objeto Date -->
+      <p>Fecha: {{ mesa.fecha | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+      <p>Order Total: {{ mesa.order.total | currency:'MXN':'symbol':'1.2-2' }}</p>
+      
+    </ion-label>
+  </ion-item>
+</ion-list>
+<!-- Suma total de totales -->
+<ion-label class="total-sum" *ngIf="historial.length > 0">
+  Suma total: {{ totalSum | currency:'MXN':'symbol':'1.2-2' }}
+</ion-label>
+
+      
+    </ion-card-content>
+  </ion-card>
+</ion-content>

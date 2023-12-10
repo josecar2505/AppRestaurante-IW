@@ -14,6 +14,6 @@ export interface Order {
 export interface Mesa {
     numeroMesa : number;
     order: Order;
-    fecha: Date;
+    fecha: Date | string;
     status: boolean;
 }

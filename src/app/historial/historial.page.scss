@@ -1,0 +1,31 @@
+ion-title {
+    font-size: 20px; /* Tamaño del texto del encabezado */
+    --color: white; 
+  }
+  /* Cambiar el color del fondo del encabezado a verde */
+  ion-header {
+    --ion-background-color: #f06610; /* Cambia a tu color verde preferido */
+    color: white; /* Color del texto en el encabezado */
+  }
+  
+  /* Cambiar el color de fondo y texto de los botones del segmento en el encabezado */
+  ion-segment-button {
+    --color: white;
+    --background: #f06610; /* Cambia a tu color verde preferido */
+  }
+  ion-content {
+    --ion-background-color: #ffffff; /* Cambia a tu color verde preferido */
+  }
+  /* Agrega este estilo en tu hoja de estilos CSS */
+  ion-card img {
+    height: 200px; /* Establece la altura que desees para todas las imágenes */
+    object-fit: cover; /* Ajusta el tamaño de la imagen para cubrir la caja manteniendo la proporción de aspecto */
+    display: block; /* Hace que la imagen sea un elemento de bloque */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+  }
+  .total-sum {
+    font-size: 18px; /* Tamaño de letra */
+    font-weight: bold; /* Texto en negrita */
+    color: black; /* Color del texto, cambia según tus preferencias */
+    margin-top: 10px; /* Margen superior para separar del contenido anterior */
+  }

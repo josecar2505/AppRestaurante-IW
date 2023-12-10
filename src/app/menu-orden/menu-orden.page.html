@@ -1,3 +1,5 @@
+
+
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -12,6 +14,9 @@
       </ion-segment-button>
       <ion-segment-button  value="comanda" (click)="gotocomanda()" [disabled]="OrderVacia()" > <!-- [disabled] = "true" -->
         <ion-label>Comanda</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="historial" *ngIf="isGerente()" (click)="gotohistorial()">
+        <ion-label>Historial</ion-label>
       </ion-segment-button>
       <ion-segment-button
         value="addProduct"
@@ -30,24 +35,21 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-grid>
     <ion-row>
-      <ion-col size="12">
-        <ion-select
-          fill="outline"
-          class="custom-select"
-          label="Tipo"
-          interface="popover"
-          label-placement="floating"
-          [(ngModel)]="filter"
-          (ionChange)="filterProducts()"
-          value="Desayunos"
-        >
-          <ion-select-option value="Desayunos"> Desayunos </ion-select-option>
-          <ion-select-option value="Entradas"> Entradas </ion-select-option>
-          <ion-select-option value="Bebidas"> Bebidas </ion-select-option>
-          <ion-select-option value="Postres"> Postres </ion-select-option>
-        </ion-select>
+      <!-- Updated to use the Ionic Grid system more effectively -->
+      <ion-col size="3" *ngFor="let type of ['Desayunos', 'Entradas', 'Bebidas', 'Postres']">
+        <ion-button
+        color="warning"
+        expand="full"
+        [class.active]="filter === type"
+        (click)="filterProducts(type)"
+        style="font-weight: bold; margin-bottom: 8px; border-radius: 5px; transition: background-color 0.3s ease;"
+      >
+        {{ type }}
+      </ion-button>
+      
       </ion-col>
     </ion-row>
+    
 
     <ion-row>
       <ion-col size="3" *ngFor="let product of productsFounds; index as i">

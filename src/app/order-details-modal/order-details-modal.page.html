@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header style="text-align: center">
+  <ion-toolbar color="orange" style="background: orange; color: white">
     <ion-title>Detalles de la Orden</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="closeModal()">
@@ -9,23 +9,68 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Total de la Orden: ${{ order.total.toFixed(2) }}</ion-card-title>
-    </ion-card-header>
-
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let item of order.items">
           <ion-label>{{ item.quantity }} x {{ item.product.name }}</ion-label>
-          <ion-note slot="end">${{ (item.quantity * item.product.price).toFixed(2) }}</ion-note>
+          <ion-note slot="end"
+            >${{ (item.quantity * item.product.price).toFixed(2) }}</ion-note
+          >
         </ion-item>
       </ion-list>
     </ion-card-content>
+    <ion-item *ngIf="paymentAmount && changeAmount">
+      <ion-label>Total de la Orden:</ion-label>
+      <ion-note
+        slot="end"
+        class="total-amount"
+        style="
+          text-align: end;
+          color: black;
+          display: block;
+          padding-right: 16px;
+        "
+        >{{ order.total | currency:'':'symbol':'1.2-2' }}</ion-note
+      >
+    </ion-item>
+    <!-- Display payment details -->
+    <ion-item *ngIf="paymentAmount && changeAmount">
+      <ion-label>Monto Pagado:</ion-label>
+      <ion-note
+        slot="end"
+        class="total-amount"
+        style="
+          text-align: end;
+          color: black;
+          display: block;
+          padding-right: 16px;
+        "
+        >{{ paymentAmount | currency:'':'symbol':'1.2-2' }}</ion-note
+      >
+    </ion-item>
+    <ion-item *ngIf="changeAmount">
+      <ion-label>Cambio:</ion-label>
+      <ion-note
+        slot="end"
+        class="total-amount"
+        style="
+          text-align: end;
+          color: black;
+          display: block;
+          padding-right: 16px;
+        "
+        >{{ changeAmount | currency:'':'symbol':'1.2-2' }}</ion-note
+      >
+    </ion-item>
   </ion-card>
-  <ion-button expand="full" color="primary" (click)="registrarMesa()">
+  <ion-button
+    expand="full"
+    color="orange"
+    (click)="registrarMesa()"
+    style="background: orange"
+  >
     Aceptar
   </ion-button>
-
 </ion-content>

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
+import { Order, OrderItem } from '../models/order.model';
 import { ComServiceService } from '../services/order.service';
-import {Order, OrderItem} from '../models/order.model';
-import { Product } from '../models/product.model';
 
-import { OrderDetailsModalPage } from '../order-details-modal/order-details-modal.page';
 import { ModalController } from '@ionic/angular';
+import { OrderDetailsModalPage } from '../order-details-modal/order-details-modal.page';
 
 
 
@@ -21,14 +20,15 @@ import { ModalController } from '@ionic/angular';
 export class ComandaPage implements OnInit {
 
   public order : Order;
+  public paymentAmount: number;
   constructor(private router: Router, private authService: AuthService, 
     private comServiceService: ComServiceService, 
     private alertController: AlertController,
     private modalController: ModalController
   ) {
     this.order = this.comServiceService.getOrder();
+    this.paymentAmount = 0; // Initialize paymentAmount
   }
-
   
 
 
@@ -39,6 +39,8 @@ export class ComandaPage implements OnInit {
     component: OrderDetailsModalPage,
     componentProps: {
       order: order,
+      paymentAmount: this.paymentAmount,
+      changeAmount: this.paymentAmount - order.total,
     },
     cssClass: 'order-details-modal' // Agrega una clase de estilo personalizado si es necesario
   });
@@ -62,6 +64,15 @@ export class ComandaPage implements OnInit {
   public NumMesa(){
     return this.comServiceService.numeroMesa;
   }
+
+  public gotohistorial() {
+    this.router.navigate(['/historial']);
+  }
+
+  isGerente(): boolean {
+    return this.authService.getUserData().type == 'administrador';
+  }
+
 
   ngOnInit() {
   }
