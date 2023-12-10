@@ -6,7 +6,6 @@ import { AuthService } from '../services/auth.service';
 import { ComServiceService } from '../services/order.service';
 import { ProductService } from '../services/product.service';
 
-
 @Component({
   selector: 'app-menu-orden',
   templateUrl: './menu-orden.page.html',
@@ -19,6 +18,17 @@ export class MenuOrdenPage implements OnInit {
   public productsFounds: Product[] = [];
   public filter: string = '';
 
+  // Variable para rastrear el último botón presionado
+  lastClickedButton: string | null = null;
+
+  // Agrega una estructura de datos para rastrear el estado de los botones
+  buttonStates: { [key: string]: boolean } = {
+    'Desayunos': false,
+    'Entradas': false,
+    'Bebidas': false,
+    'Postres': false
+  };
+
   constructor(
     private router: Router,
     private productService: ProductService,
@@ -29,7 +39,6 @@ export class MenuOrdenPage implements OnInit {
 
   ngOnInit() {
     this.userData = this.authService.getUserData();
-    
 
     this.productService.getProducts().subscribe((products: Product[]) => {
       this.products = products;
@@ -63,6 +72,17 @@ export class MenuOrdenPage implements OnInit {
   }
 
   filterProducts(type: string): void {
+    // Desbloquear el último botón presionado
+    if (this.lastClickedButton) {
+      this.buttonStates[this.lastClickedButton] = false;
+    }
+
+    // Bloquear el botón actual
+    this.buttonStates[type] = true;
+
+    // Actualizar el último botón presionado
+    this.lastClickedButton = type;
+
     // Toggle selection for the clicked button
     this.filter = this.filter === type ? '' : type;
 
@@ -113,4 +133,10 @@ export class MenuOrdenPage implements OnInit {
     const order = this.comServiceService.getOrder();
     return order.items.length === 0;
   }
+
+  // Función para determinar si un botón debe estar deshabilitado
+  isButtonDisabled(type: string): boolean {
+    return this.buttonStates[type];
+  }
 }
+

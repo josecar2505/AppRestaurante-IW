@@ -34,20 +34,20 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-grid>
-    <ion-row>
-      <!-- Updated to use the Ionic Grid system more effectively -->
-      <ion-col size="3" *ngFor="let type of ['Desayunos', 'Entradas', 'Bebidas', 'Postres']">
-        <ion-button
-          expand="full"
-          color = "warning"
-          [class.active]="filter.includes(type)"
-          (click)="filterProducts(type)"
-          style="font-weight: bold; margin-bottom: 8px; border-radius: 5px; transition: background-color 0.3s ease;"
-        >
-          {{ type }}
-        </ion-button>
-      </ion-col>
-    </ion-row>
+ <ion-row>
+  <ion-col size="3" *ngFor="let type of ['Desayunos', 'Entradas', 'Bebidas', 'Postres']">
+    <ion-button
+      expand="full"
+      color="orange"
+      [class.active]="filter.includes(type)"
+      (click)="filterProducts(type)"
+      style="font-weight: bold; margin-bottom: 8px; border-radius: 5px; transition: background-color 0.3s ease; background-color: orange;"
+      [disabled]="isButtonDisabled(type)"
+    >
+      {{ type }}
+    </ion-button>
+  </ion-col>
+</ion-row>
     
 
     <ion-row>
