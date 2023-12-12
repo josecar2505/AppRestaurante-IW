@@ -31,40 +31,44 @@
 <ion-content [fullscreen]="true" class="ion-padding">
   <ion-card class="ion-card-centered">
     <ion-card-content>
-      <h1>Historial de Ventas</h1>
+      <div style="text-align: center;">
+        <h1>Historial de Ventas</h1>
+      </div>
       
       <!-- Date Range Selection -->
-      <ion-item>
-        <ion-label>Fecha de inicio</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="startDate"></ion-datetime>
-      </ion-item>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+  <ion-col class="ion-text-center" style="margin-left: 160px;">
+    <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="startDate">
+      <span slot="title">Fecha de inicio</span>
+    </ion-datetime>
+  </ion-col>
 
-      <ion-item>
-        <ion-label>Fecha de fin</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="endDate"></ion-datetime>
-      </ion-item>
+  <ion-col class="ion-text-center" style="margin-left: 160px;">
+    <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]="endDate">
+      <span slot="title">Fecha de fin</span>
+    </ion-datetime>
+  </ion-col>
+</ion-row>
 
-      <ion-button (click)="loadHistorial()">Buscar Historial</ion-button>
-
-      <!-- Display Historical Sales -->
-      <!-- Display Historical Sales -->
-<ion-list *ngIf="historial.length > 0">
-  <ion-item *ngFor="let mesa of historial">
-    <ion-label>
-      <h2>Mesa {{ mesa.numeroMesa }}</h2>
-      <p>Status: {{ mesa.status ? 'Occupied' : 'Vacant' }}</p>
-      <!-- No es necesario llamar a toDate() en un objeto Date -->
-      <p>Fecha: {{ mesa.fecha | date:'yyyy-MM-dd HH:mm:ss' }}</p>
-      <p>Order Total: {{ mesa.order.total | currency:'MXN':'symbol':'1.2-2' }}</p>
+      <ion-button (click)="loadHistorial()" color="orange" style="background:orange; width: 100%;">Buscar Historial</ion-button>
       
-    </ion-label>
-  </ion-item>
-</ion-list>
-<!-- Suma total de totales -->
-<ion-label class="total-sum" *ngIf="historial.length > 0">
-  Suma total: {{ totalSum | currency:'MXN':'symbol':'1.2-2' }}
-</ion-label>
 
+      <!-- Display Historical Sales -->
+      <ion-list *ngIf="historial.length > 0">
+        <ion-item *ngFor="let mesa of historial">
+          <ion-label>
+            <h2>Mesa {{ mesa.numeroMesa }}</h2>
+            <!-- No es necesario llamar a toDate() en un objeto Date -->
+            <p>Fecha: {{ mesa.fecha | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+            <p>Order Total: {{ mesa.order.total | currency:'MXN':'symbol':'1.2-2' }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      
+      <!-- Suma total de totales -->
+      <ion-label class="total-sum" *ngIf="historial.length > 0">
+        Suma total: {{ totalSum | currency:'MXN':'symbol':'1.2-2' }}
+      </ion-label>
       
     </ion-card-content>
   </ion-card>

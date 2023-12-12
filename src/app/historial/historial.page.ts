@@ -58,9 +58,5 @@ loadHistorial() {
       this.totalSum = this.historial.reduce((sum, mesa) => sum + mesa.order.total, 0);
     });
 }
-
-
-  
-  
   
 }
