@@ -46,9 +46,10 @@ ion-title {
 @import '~@ionic/angular/css/flex-utils.css';
 
 ion-datetime {
-  --background: #f9f7f5; /* Color melocotón claro */
-  --background-rgb: 255, 218, 185;
-
+  background: #f9f7f5; /* Color melocotón claro */
   border-radius: 16px;
-  box-shadow: rgba(var(--ion-color-rose-rgb), 0.3) 0px 10px 15px -3px;
+  width: 400px; /* Ajusta el ancho según tus necesidades */
+  height: 520px; /* Ajusta la altura según tus necesidades */
+  font-size: 14px; /* Ajusta el tamaño del texto según tus necesidades */
 }
+
